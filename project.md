@@ -27,3 +27,9 @@ What kind of publication are we seeking? What is the scope of the study.
 - We can use solidbench and at random change the vocabulary of some terms
     - We use the same queries as we have right now
     - We create versions of those queries that can cope with the alternative
+- What can we change
+    - use a schema.org vocab for profile
+    - use a version where the name is in one field
+    - Use IRI for gender
+    - Use IRI for language
+    - Likes with variations
