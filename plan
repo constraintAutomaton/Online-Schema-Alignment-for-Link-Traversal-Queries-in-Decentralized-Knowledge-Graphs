@@ -1,0 +1,14 @@
+- Introduction (0.5)
+- Related works (0.5)
+    - Reasoning
+    - Reasoning SPARQL endpoint
+    - Entailment regime
+    - Schema alignment
+- Schema in LTQP (1)
+    - alignment rules
+    - Discovery of alignment rules
+    - Reachability criteria impact
+- benchmark (1)
+
+- conclusion (0.5)
+- reference (0.5)

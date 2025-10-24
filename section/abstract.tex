@@ -1,0 +1,13 @@
+\begin{abstract}
+% Context
+Federated SPARQL queries can impose significant computational overhead on both federation endpoints and querying clients.
+% Need
+In contexts such as scientific reproducibility studies, it is often necessary to re-execute queries or run queries that are minor variations of previously executed ones. However, reissuing these queries can lead to unnecessary load, creating a barrier to such use cases.
+% Task
+To mitigate this, it is necessary to develop mechanisms that allow reusing previously computed query results to reduce redundant computation and network traffic.
+% Object
+ In this paper, we propose using SPARQL query containment as a cache hit mechanism to reuse the results of prior queries. Existing work on SPARQL containment does not adequately address the bag-set semantics of SPARQL, nor does it support federated queries. To bridge this gap, we extend the SPECS approach to support these scenarios. We also provide a new open-source implementation that is fully unit-tested, extensible, and compatible with browser environments.
+
+% Findings
+% Conclusion
+\end{abstract}
