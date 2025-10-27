@@ -44,9 +44,18 @@
 %% for your publication.
 %%
 %%
-\documentclass[sigconf, review]{acmart}
+\documentclass[sigconf, review, natbib=false]{acmart}
 \usepackage[acronym]{glossaries}
+\usepackage{listings}
+%% auto break lines
+\lstset{
+  breaklines=true,
+  basicstyle=\fontsize{8}{9}\selectfont\ttfamily,
+}
+\usepackage[style=numeric]{biblatex}
+\addbibresource{references.bib}
 
+\usepackage{subfiles} % Best loaded last in the preamble
 %%
 %% \BibTeX command to typeset BibTeX logo in the docs
 \AtBeginDocument{%
@@ -109,6 +118,8 @@
 
 
 \newacronym{kg}{KG}{knowledge Graph}
+\newacronym{sssom}{SSSOM}{A Simple Standard for Sharing Ontological Mappings}
+\newacronym{iri}{IRI}{Internationalized Resource Identifier}
 
 %%
 %% end of the preamble, start of the body of the document source.
@@ -160,7 +171,7 @@
 %% of authors' names for this purpose.
 \renewcommand{\shortauthors}{Tam et al.}
 
-\include{section/abstract}
+\subfile{section/abstract}
 
 %%
 %% Keywords. The author(s) should pick words that accurately describe
@@ -173,12 +184,16 @@
 %% information and builds the first part of the formatted document.
 \maketitle
 
-\include{section/introduction}
+\subfile{section/introduction}
+\subfile{section/preliminary}
+\subfile{section/method}
 %%
 %% The next two lines define the bibliography style to be used, and
 %% the bibliography file.
-\bibliographystyle{ACM-Reference-Format}
-\bibliography{references}
+%\bibliographystyle{ACM-Reference-Format}
+%\bibliography{}
+
+\printbibliography
 
 \end{document}
 

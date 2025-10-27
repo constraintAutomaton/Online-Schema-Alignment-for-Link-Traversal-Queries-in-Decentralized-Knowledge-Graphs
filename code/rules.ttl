@@ -1,0 +1,23 @@
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix semmap: <https://semanticmapping.org/vocab#> .
+@prefix ldbc3: <http://www.ldbc.eu/ldbc_socialnet/3.0/vocabulary/> .
+@prefix ldbc1: <http://www.ldbc.eu/ldbc_socialnet/1.0/vocabulary/> .
+@prefix ex: <http://example.org/>
+
+ex:ruleSet ;
+    a semmap:RuleSet ;
+    semmap:subweb "http://example.org/data/{+path}" ;
+
+    semmap:rule [
+        a semmap:MappingRule ;
+        semmap:premise ldbc3:id ;
+        semmap:inference skos:exactMatch ;
+        semmap:conclusion ldbc1:id
+    ] ;
+
+    semmap:rule [
+        a semmap:MappingRule ;
+        semmap:premise ldbc3:creationDate ;
+        semmap:inference skos:exactMatch ;
+        semmap:conclusion ldbc1:creationDate
+    ] .

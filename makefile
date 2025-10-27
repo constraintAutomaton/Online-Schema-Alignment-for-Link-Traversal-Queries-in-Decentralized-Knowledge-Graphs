@@ -1,4 +1,4 @@
-SOURCE = main.tex references.bib section/*.tex makefile
+SOURCE = main.tex references.bib section/*.tex code/* makefile
 
 .PHONY: clean watch
 
