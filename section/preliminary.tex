@@ -25,7 +25,7 @@ A subweb is a (sub)DKG defined by the KG derived from a set of \glspl{iri} contr
 
 \Gls{ltqp} is a query paradigm that consist of exploiting the fact that \glspl{iri} in triples can be dereferenced to find \gls{kg} that should provide more useful information about a term~\cite{linked_data}.
 The processing of those queries consist of starting with an initial empty knowledge base (a \gls{kg} inside of a database), a set of initial links and a set of \textit{reachability criteria}~\cite{Hartig2012}.
-The query processing start by dereferencing~\footnote{By dereferencing we mean performing an \gls{http} GET on an \gls{iri}} the initial links and inserting the \gls{kg} from those resources inside the internal knowledge base.
+The query processing start by dereferencing~\footnote{By dereferencing we mean performing an \glsentryshort{http} GET on an \gls{iri}} the initial links and inserting the \gls{kg} from those resources inside the internal knowledge base.
 The next step consist of traversing the network using the triple inside of the knowledge base using the reachability criterion.
 Reachability criterion are boolean function that returns $true$ iff an \gls{iri} from a triple respect a condition defined by the engine.
 Example of such criterion are following the object term of triples having a predicate term with a specific \gls{iri} or the criterion \texttt{Cmatch}~\cite{hartig2016walking} which consist of dereferencing

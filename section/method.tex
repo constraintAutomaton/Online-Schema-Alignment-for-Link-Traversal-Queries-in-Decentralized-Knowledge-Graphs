@@ -1,6 +1,6 @@
 \section{Online Schema Aligmnent}
 
-\subsection{Description of Our Approach}
+\subsection{Description of the Approach}
 Schema alignment requires the definition of a set of rules.
 In this work, we draw inspiration from the \gls{sssom} specification~\cite{sssom_website, matentzoglu2022simple} to structure and formalize these rules.
 An example of the resulting serialization is presented in Figure~\ref{fig:ruleSet}.
@@ -10,13 +10,14 @@ In other words, these rules apply only within the designated subweb.
 We opted for this design for several practical reasons.
 
 Our system operates under the open-world assumption, in which multiple new \glspl{kg} and schema alignment rules may be discovered during processing.
-To ensure robustness, the system must prevent infinite recursive rule applications.\footnote{With our schema alignment entailment, contradictions are not possible.}
+To ensure robustness, the system must prevent infinite recursive rule applications.\footnote{With our schema alignment entailment, logical contradictions are not possible.}
 When such situations occur, it should ideally resolve them without aborting the entire computation.
 Since rules are applied within specific domainsthe likelihood of infinite recursion is significantly reduced.
-In cases where infinite recursion is detected or of overlap of subwebs, a simple resolution strategy is employed: the newly generated schema alignment rule set is rejected.
+In cases where infinite recursion is detected or of overlap of subwebs, the simple resolution strategy of rejecting the newly generated schema alignment rule is employed.
 
 Another important consideration is the potential misuse, overspecification, and underspecification of ontology terms~\cite{abedjan2012reconciling, lorey2011rdf}.
 In our use case, the goal is to enable querying data across the web under the assumption that data providers best understand their own data models and the intended entailments.
+Thus we avoid potential unatended entailments.
 However, we also allow query issuers to define additional rules that may interact with those provided by data publishers.
 This is justified by the fact that query issuers can more easily track and manage the consequences of their own entailment definitions, whereas it would be unrealistic to expect data providers to anticipate the broader implications of their rules beyond the scope of their own datasets or use cases.
 
@@ -38,15 +39,40 @@ This mechanism enables reasoning over the level of precision of mappings when re
 
 To discover rules we follow the reachability criteria paradigmn, however with some modification in the pipine of operation.
 We define a reacacbility criterion $c_{sa}$ that dereference the object term of a triple with a predicate with the iri \texttt{semmap:ruleSetLocation}
-At a step $s$ a query engine receive a new \glspl{kg} $KG$ in the form of a stream.
-This $KG$
+At a step $s$ a query engine receive a new \glspl{kg} $KG$.
+$c_{sa}$  alone is applied to determine if new alignment rules can be found.
+In the case of found alignment rules, the alignment rules \glspl{kg} is parsed in the engine.
+Then the alignment is operated over $KG$ to create $KG^{\prime}$.
+The triples of $KG^{\prime}$ is then passed to the other reachability criteria and inserted into the internal knowledge base.
+It is important to use the timples of $KG^{\prime}$ instead of $KG$ because the reachability creterion are not made to consider alignment of different vocabularies,
+thus it is necessary to other generate online multiple criterion taking into consideration the alignment which can be non-trivial given that arbitrary computation is allowed in the criterion for some criterion or to make sure that aligned triples
+are passed to the criteria.
 
-A query engine receive a  $T$ at
+To discover new rules, we follow the reachability criteria paradigm, with certain modifications in the operational pipeline.
+We define a reachability criterion $c_{sa}$, which dereferences the object term of any triple whose predicate has the IRI \texttt{semmap:ruleSetLocation}.
+At a step $s$, the query engine receives a new \gls{kg}, denoted as $KG$.
+The criterion $c_{sa}$ is applied independently to determine whether new alignment rules can be discovered.
+If such rules are found, the corresponding alignment rule \gls{kg} are parsed and loaded into the engine.
+The alignment process is then executed over $KG$, producing an aligned graph $KG^{\prime}$.
+The triples of $KG^{\prime}$ are subsequently passed to the other reachability criteria and inserted into the internal knowledge base.
+It is crucial to use the triples of $KG^{\prime}$ rather than those of $KG$, since the reachability criteria are not designed to handle alignments across different vocabularies.
+Therefore, either one must dynamically generate multiple online criteria that incorporate the alignment logic, which can be non-trivial given that criterion allow arbitrary computation, or ensure that the aligned triples are directly passed to the existing criteria.
 
-We define $AR_s$ as the set of mapping between subwebs $S$ and schema algiment rules $R$ at the step $s$.
-\begin{equation} \label{eq:schema_alignment_scoped}
-    AR_s = \left\{ S_i \mapsto R_i| 1 \ge i \le n \right\} \cup \left\{ S_j \mapsto R_j| 1 \ge j \le n_s \right\}
+For the processing of rules we define $AR_s$ as the set of mapping between subwebs $S$ and schema algiment rules $R$ at the step $s$.
+We consider that a step is the aquisition of a new \gls{kg} by the derefencing of an \gls{iri}.
+More formally
+\begin{equation} \label{eq:schema_alignment_union}
+    AR_s = AR_u \cup AR_d
 \end{equation}
-Where $n$ is the number of query issuer defined alignment rules and $n_t$ is the number of discovered alignment rules at the step $s$.
 
-\subsection{Implementation}
+\begin{equation*} \label{eq:schema_alignment_upper}
+    AR_u = \left\{ S_i \mapsto R_i \,\middle|\, 1 \le i \le n \right\}
+\end{equation*}
+
+\begin{equation*} \label{eq:schema_alignment_disjoint}
+    AR_d = \left\{ S_j \mapsto R_j \,\middle|\, 1 \le j \le n_s
+    \land \forall k \neq j,\; 1 \le k \le n_s \;, S_j \cap S_k = \emptyset \right\}
+\end{equation*}
+
+$AR_u$ denotes the set of $n$ rules defined by the user, while $AR_d$ represents the set of $n_s$ rules discovered up to and including step $s$.
+Note that the discovered rules in $AR_d$ are required to be non-overlapping, whereas overlaps with the user-defined rules in $AR_u$ are permitted.
