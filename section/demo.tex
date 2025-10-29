@@ -1,0 +1,29 @@
+\section{Demonstration}
+
+In this section, we present a demonstration of our system.
+
+We implemented an online schema alignment system using the link traversal version of the Comunica~\cite{taelman2018comunica} query engine.
+Both our demonstration~\footnote{\url{https://github.com/onlineSchemaAlignmentLTQP/demonstration}} and implementation~\footnote{\url{https://www.npmjs.com/package/query-sparql-link-traversal-solid-schema-alignment}} are open source and publicly available.
+Users can download the implementation to integrate it as a library or use its command-line interface to execute queries.
+
+Our demonstration scenario is based on a social media network built using the SolidBench benchmark~\cite{Taelman2023}.
+This social media network is decentralized, meaning that users store their data in personal data vaults called \emph{pods}, thus there are no centralized endpoint to query the user information.
+For the purpose of this demonstration, we modified the user data such that different users express similar information using different vocabularies.
+Additionally, each user exposes a file that describes their schema alignment rules, following the format illustrated in Figure~\ref{fig:ruleSet}.
+
+The modifications include:
+\begin{itemize}
+    \item Using the original vocabulary.
+    \item Using an alternative version of the vocabulary.
+    \item Using the HTTPS variant of the vocabulary.
+    \item Using an \gls{iri} derived from literal values, e.g., ``male'', ``female'', ``Firefox'', ``Chrome''.
+    \item Describing the alignment between certain \glspl{iri} from the original vocabulary and the corresponding terms in Wikidata and DBpedia.
+\end{itemize}
+
+The demonstrator is a web-based application that allows users to execute either the proposed benchmark queries or arbitrary custom queries.
+Queries can be run over different network configurations: the base network or variants that use alternative vocabularies.
+For each execution, the system provides detailed feedback, including the query results, execution time, and the alignments established during query processing, along with their associated subwebs.
+Users can also define custom schema alignment rules and specify the subwebs to which these rules apply.
+Additionally, the demonstrator includes a set of pre-defined queries using alternative vocabularies, together with the corresponding alignment rules that map them to the base SolidBench network.
+Furthermore, users can explore and compare both network configurations through a web interface that presents them in a file-based navigation view.
+We also provide a visual representation of the base network's data model, along with the set of alignment rules applied to the network variants that use different vocabularies.

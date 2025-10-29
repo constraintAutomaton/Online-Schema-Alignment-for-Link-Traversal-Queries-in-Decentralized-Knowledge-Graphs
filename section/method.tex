@@ -1,6 +1,6 @@
 \section{Online Schema Aligmnent}
 
-\subsection{Schema Alignment}
+\subsection{Description of Our Approach}
 Schema alignment requires the definition of a set of rules.
 In this work, we draw inspiration from the \gls{sssom} specification~\cite{sssom_website, matentzoglu2022simple} to structure and formalize these rules.
 An example of the resulting serialization is presented in Figure~\ref{fig:ruleSet}.
@@ -36,12 +36,17 @@ This mechanism enables reasoning over the level of precision of mappings when re
     \label{fig:ruleSet}
 \end{figure}
 
-\subsection{Discovery and Processing of Alignment Rules}
-We define $AR_t$ as the set of mapping between subwebs $S$ and schema algiment rules $R$ at the time $t$.
-\begin{equation} \label{eq:schema_alignment_scoped}
-    AR = \left\{ S_i \mapsto R_i| 1 \ge i \le n \right\} \cup \left\{ S_j \mapsto R_j| 1 \ge j \le n_t \right\}
-\end{equation}
-Where $n$ is the number of query issuer defined alignment rules and $n_t$ is the number of discovered alignment rules at the time $t$.
+To discover rules we follow the reachability criteria paradigmn, however with some modification in the pipine of operation.
+We define a reacacbility criterion $c_{sa}$ that dereference the object term of a triple with a predicate with the iri \texttt{semmap:ruleSetLocation}
+At a step $s$ a query engine receive a new \glspl{kg} $KG$ in the form of a stream.
+This $KG$
 
-\subsubsection{Software Architecture}
-test
+A query engine receive a  $T$ at
+
+We define $AR_s$ as the set of mapping between subwebs $S$ and schema algiment rules $R$ at the step $s$.
+\begin{equation} \label{eq:schema_alignment_scoped}
+    AR_s = \left\{ S_i \mapsto R_i| 1 \ge i \le n \right\} \cup \left\{ S_j \mapsto R_j| 1 \ge j \le n_s \right\}
+\end{equation}
+Where $n$ is the number of query issuer defined alignment rules and $n_t$ is the number of discovered alignment rules at the step $s$.
+
+\subsection{Implementation}
