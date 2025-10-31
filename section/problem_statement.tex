@@ -1,2 +1,16 @@
 \section{Problem Statement}
-The problem motivating
+The problem motivating this demo paper is that, in many use cases, different data providers express semantically equivalent properties in heterogeneous ways, which causes difficulties when performing link traversal queries.
+Some of these inconsistencies may appear trivial, for instance, the use of both \gls{https} and \gls{http} vocabularies, yet they still require query adaptations, since the query issuer often intends to treat both vocabularies as equivalent.
+In such simple cases, one might address the issue by adding \texttt{UNION} clauses to the query.
+
+However, this approach has several limitations.
+First, it assumes that, within a large and decentralized network, the query issuer is aware of all relevant alignment rules.~\footnote{There are also considerations regarding query size and interpretability.}
+Second, it presumes that these alignment rules are globally applicable across every encountered subweb, which is unrealistic given the inherent complexity of ontology design~\cite{abedjan2012reconciling, lorey2011rdf}.
+A further challenge arises when rule chaining is required: this either necessitates materializing intermediate \glspl{kg} through multiple \texttt{CONSTRUCT} queries or performing rule backchaining to materialize a final query~\cite{maarten2023pod}.
+Neither strategy is compatible with \gls{ltqp}.
+Executing multiple queries disrupts traversal policies, as the query engine would need to maintain awareness of resources already traversed by other queries.
+Conversely, materializing only a final query through backchaining fails to account for intermediate queries that may be essential for discovering and traversing the required subwebs.
+
+More complex cases involve deeper semantic mismatches.
+For example, different providers may conceptualize a response to a post as either a "reply" or a "comment".
+Similarly, some may represent attributes such as gender or city names as literals, while others may use \glspl{iri}.~\footnote{See Section~\ref{sec:kg}}
