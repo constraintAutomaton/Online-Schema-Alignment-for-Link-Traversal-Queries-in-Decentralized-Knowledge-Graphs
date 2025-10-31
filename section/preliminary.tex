@@ -1,14 +1,20 @@
 \section{Preliminary}
 This section present some preliminary notions to understand our approach.
 
-\subsection{Knowledge Graph and \gls{rdf}}
+\subsection{Knowledge Graph and \gls{rdf}}\label{sec:kg}
 
-A \gls{kg} is a representation of knowledge in the form of a graph expressed as a set of triples~\cite{w3ConceptsAbstract}.
-\Gls{rdf} triples $t = (s, p, o)$ are tuples composed of three terms~\footnote{Definition inspired by ~\citetitle{traveling_map_ltqp}~\cite{traveling_map_ltqp}}:
+A \gls{kg} represents knowledge in the form of a graph expressed as a set of triples~\cite{w3ConceptsAbstract}.
+\Gls{rdf} triples, denoted as $t = (s, p, o)$, are ordered tuples composed of three terms~\footnote{Definition inspired by \citetitle{traveling_map_ltqp}~\cite{traveling_map_ltqp}}:
 a subject $s \in \mathcal{I} \cup \mathcal{B}$,
 a predicate $p \in \mathcal{I}$,
 and an object $o \in \mathcal{I} \cup \mathcal{B} \cup \mathcal{L}$.
 Here, $\mathcal{I}$, $\mathcal{B}$, and $\mathcal{L}$ denote, respectively, the sets of all possible \glspl{iri}, blank nodes, and literals.
+
+A triple expresses an atomic statement of the form “Socrates (subject) is (predicate) a man (object).”
+Accordingly, a \gls{kg} can encode a collection of statements such as “Plato wrote about Socrates,” “Socrates is a man,” and “A man has two legs.”
+If the terms are \glspl{iri}, they can be dereferenced~\footnote{Dereferencing refers to performing an \glsentryshort{http} GET request on an \gls{iri}}
+to obtain additional information about a term.
+For instance, if \texttt{Socrates} is a dereferenceable \gls{iri}, accessing it may yield another \gls{kg} containing biographical information about Socrates.
 
 \subsection{Decentralized Knowledge Graphs and Subweb~\cite{traveling_map_ltqp}}\label{sec:dkg}
 
@@ -21,11 +27,11 @@ The $iri_j$ are \gls{rdf} terms in the triples in $g_i$.
 $G$ is formed by the union of all the $g_i$ mapped to a resource in the network.
 A subweb is a (sub)DKG defined by the KG derived from a set of \glspl{iri} controlled by a data provider.
 
-\subsection{Link Traversal Query Processing}
+\subsection{Link Traversal Query Processing}\label{sec:ltqp}
 
 \Gls{ltqp} is a query paradigm that consist of exploiting the fact that \glspl{iri} in triples can be dereferenced to find \gls{kg} that should provide more useful information about a term~\cite{linked_data}.
-The processing of those queries consist of starting with an initial empty knowledge base (a \gls{kg} inside of a database), a set of initial links and a set of \textit{reachability criteria}~\cite{Hartig2012}.
-The query processing start by dereferencing~\footnote{By dereferencing we mean performing an \glsentryshort{http} GET on an \gls{iri}} the initial links and inserting the \gls{kg} from those resources inside the internal knowledge base.
+The processing of such queries begins with an initially empty knowledge base (a \gls{kg} stored within a database), a set of initial links, and a set of \textit{reachability criteria}~\cite{Hartig2012}, which can be regarded as traversal policies.
+The query processing start by dereferencing the initial links and inserting the \gls{kg} from those resources inside the internal knowledge base.
 The next step consist of traversing the network using the triple inside of the knowledge base using the reachability criterion.
 Reachability criterion are boolean function that returns $true$ iff an \gls{iri} from a triple respect a condition defined by the engine.
 Example of such criterion are following the object term of triples having a predicate term with a specific \gls{iri} or the criterion \texttt{Cmatch}~\cite{hartig2016walking} which consist of dereferencing
