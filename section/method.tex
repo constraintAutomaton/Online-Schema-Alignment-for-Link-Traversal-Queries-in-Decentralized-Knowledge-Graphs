@@ -37,25 +37,14 @@ This mechanism enables reasoning over the level of precision of mappings when re
     \label{fig:ruleSet}
 \end{figure}
 
-To discover rules we follow the reachability criteria paradigmn, however with some modification in the pipine of operation.
-We define a reacacbility criterion $c_{sa}$ that dereference the object term of a triple with a predicate with the iri \texttt{semmap:ruleSetLocation}
-At a step $s$ a query engine receive a new \glspl{kg} $KG$.
-$c_{sa}$  alone is applied to determine if new alignment rules can be found.
-In the case of found alignment rules, the alignment rules \glspl{kg} is parsed in the engine.
-Then the alignment is operated over $KG$ to create $KG^{\prime}$.
-The triples of $KG^{\prime}$ is then passed to the other reachability criteria and inserted into the internal knowledge base.
-It is important to use the timples of $KG^{\prime}$ instead of $KG$ because the reachability creterion are not made to consider alignment of different vocabularies,
-thus it is necessary to other generate online multiple criterion taking into consideration the alignment which can be non-trivial given that arbitrary computation is allowed in the criterion for some criterion or to make sure that aligned triples
-are passed to the criteria.
-
 To discover new rules, we follow the reachability criteria paradigm, with certain modifications in the operational pipeline.
 We define a reachability criterion $c_{sa}$, which dereferences the object term of any triple whose predicate has the IRI \texttt{semmap:ruleSetLocation}.
-At a step $s$, the query engine receives a new \gls{kg}, denoted as $KG$.
+At a step $s$, the query engine receives a new \gls{kg}, denoted as $G$.
 The criterion $c_{sa}$ is applied independently to determine whether new alignment rules can be discovered.
 If such rules are found, the corresponding alignment rule \gls{kg} are parsed and loaded into the engine.
-The alignment process is then executed over $KG$, producing an aligned graph $KG^{\prime}$.
-The triples of $KG^{\prime}$ are subsequently passed to the other reachability criteria and inserted into the internal knowledge base.
-It is crucial to use the triples of $KG^{\prime}$ rather than those of $KG$, since the reachability criteria are not designed to handle alignments across different vocabularies.
+The alignment process is then executed over $G$, producing an aligned graph $G^{\prime}$.
+The triples of $G^{\prime}$ are subsequently passed to the other reachability criteria and inserted into the internal knowledge base.
+It is crucial to use the triples of $G^{\prime}$ rather than those of $G$, since the reachability criteria are not designed to handle alignments across different vocabularies.
 Therefore, either one must dynamically generate multiple online criteria that incorporate the alignment logic, which can be non-trivial given that criterion allow arbitrary computation, or ensure that the aligned triples are directly passed to the existing criteria.
 
 For the processing of rules we define $AR_s$ as the set of mapping between subwebs $S$ and schema algiment rules $R$ at the step $s$.
