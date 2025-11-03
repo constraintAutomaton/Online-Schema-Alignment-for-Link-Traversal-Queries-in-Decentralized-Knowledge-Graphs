@@ -7,8 +7,13 @@ the pursuit of decentralized system architectures, and the ambition to enable cr
 The integration of multiple knowledge bases presents several challenges.
 A first challenge concerns scalability: due to the size of the data or privacy constraints, it is often impractical to materialize all knowledge bases within a single database system.
 In such cases, paradigms such as federated querying~\cite{buil2013federating} or link traversal-based querying~\cite{Hartig2012} can effectively address these limitations.
-Another major challenge arises from heterogeneity in knowledge representation or vocabulary, particularly in the context of \gls{kg}, which is the focus of this paper.
+Another major challenge arises from heterogeneity in knowledge representation and vocabulary, particularly within \glspl{kg} and the SPARQL query language, which form the focus of this paper.
 In many use cases, query issuers expect to formulate their queries under the assumption of a single, consistent knowledge representation.
+
+The problem of schema alignment can be regarded as a specific form of reasoning, as querying itself is a subset of reasoning.
+The application of reasoning rules within SPARQL endpoints has already been explored~\cite{terdjimi2016hylar, terdjimi2015hylar}, and schema alignment in SPARQL-based systems has also been investigated~\cite{Joshi2012, maarten2023pod}.
+However, existing approaches assume that alignment rules are known a priori, apply globally across static datasets, and can be evaluated over centralized or pre-materialized data.
+In contrast, our work introduces the notion of \textit{online schema alignment}, where schema mappings are discovered, scoped, and applied dynamically during the query execution in decentralized environments.
 
 This demo paper focuses on online schema alignment during \gls{ltqp}~\cite{Hartig2012}, enabling the execution of SPARQL queries~\cite{sparql_specification} over distributed networks.
 We propose a mechanism to dynamically retrieve remote schema alignment rules in order to align the target datasets with the user-issued query.

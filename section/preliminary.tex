@@ -1,5 +1,5 @@
 \section{Preliminary}
-This section present some preliminary notions to understand our approach.
+This section presents some preliminary notions to understand our approach.
 
 \subsection{Knowledge Graph and \gls{rdf}}\label{sec:kg}
 
@@ -12,7 +12,7 @@ Here, $\mathcal{I}$, $\mathcal{B}$, and $\mathcal{L}$ denote, respectively, the 
 
 A triple expresses an atomic statement of the form “Socrates (subject) is (predicate) a man (object).”
 Accordingly, a \gls{kg} can encode a collection of statements such as “Plato wrote about Socrates,” “Socrates is a man,” and “A man has two legs.”
-If the terms are \glspl{iri}, they can be dereferenced~\footnote{Dereferencing refers to performing an \glsentryshort{http} GET request on an \gls{iri}}
+If the terms are \glspl{iri}, they can be dereferenced~\footnote{Dereferencing denotes performing an \glsentryshort{http} GET request on an \gls{iri}}
 to obtain additional information about a term.
 For instance, if \texttt{Socrates} is a dereferenceable \gls{iri}, accessing it may yield another \gls{kg} containing biographical information about Socrates.
 
@@ -29,12 +29,12 @@ A subweb is a (sub)DKG defined by the KG derived from a set of \glspl{iri} contr
 
 \subsection{Link Traversal Query Processing}\label{sec:ltqp}
 
-\Gls{ltqp} is a query paradigm that consist of exploiting the fact that \glspl{iri} in triples can be dereferenced to find \gls{kg} that should provide more useful information about a term~\cite{linked_data}.
+\Gls{ltqp} is a query paradigm that consists of exploiting the fact that \glspl{iri} in triples can be dereferenced to find \gls{kg} that should provide more useful information about a term~\cite{linked_data}.
 The processing of such queries begins with an initially empty knowledge base (a \gls{kg} stored within a database), a set of initial links, and a set of \textit{reachability criteria}~\cite{Hartig2012}, which can be regarded as traversal policies.
 The query processing start by dereferencing the initial links and inserting the \gls{kg} from those resources inside the internal knowledge base.
 The next step consist of traversing the network using the triple inside of the knowledge base using the reachability criterion.
-Reachability criterion are boolean function that returns $true$ iff an \gls{iri} from a triple respect a condition defined by the engine.
+Reachability criteria are boolean function that returns $true$ iff an \gls{iri} from a triple respect a condition defined by the engine.
 Example of such criterion are following the object term of triples having a predicate term with a specific \gls{iri} or the criterion \texttt{Cmatch}~\cite{hartig2016walking} which consist of dereferencing
 \gls{iri} related to the variable of the query.
 For each triple inside of the knowledge base each reachability criterion determine which new \glspl{iri} to follow.
-In concurence the query is process in the internal knowledge base and return the results in a streaming way, such that the traveral does not have to terminate before the user is receiving results.
+In concurence the query is processed in the internal knowledge base and return the results in a streaming way, such that the traveral does not have to terminate before the user is receiving results.
