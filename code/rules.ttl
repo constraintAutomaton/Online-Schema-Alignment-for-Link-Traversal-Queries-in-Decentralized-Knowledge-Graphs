@@ -9,14 +9,12 @@ ex:ruleSet ;
     semmap:subweb "http://example.org/data/{+path}" ;
 
     semmap:rule [
-        a semmap:MappingRule ;
         semmap:premise ldbc3:id ;
         semmap:inference skos:exactMatch ;
         semmap:conclusion ldbc1:id
     ] ;
 
     semmap:rule [
-        a semmap:MappingRule ;
         semmap:premise ldbc3:creationDate ;
         semmap:inference skos:exactMatch ;
         semmap:conclusion ldbc1:creationDate

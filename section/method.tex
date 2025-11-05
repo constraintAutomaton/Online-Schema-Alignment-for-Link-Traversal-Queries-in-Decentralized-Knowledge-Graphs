@@ -11,12 +11,12 @@ We opted for this design for several practical reasons.
 Our system operates under the open-world assumption, in which multiple new \glspl{kg} and schema alignment rules may be discovered during processing.
 To ensure robustness, the system must prevent infinite recursive rule applications.\footnote{With our schema alignment entailment, logical contradictions are not possible.}
 When such situations occur, it should ideally resolve them without aborting the entire computation.
-Since rules are applied within specific domainsthe likelihood of infinite recursion is significantly reduced.
+Since rules are applied within specific domains the likelihood of infinite recursion is significantly reduced.
 In cases where infinite recursion is detected or of overlap of subwebs, the simple resolution strategy of rejecting the newly generated schema alignment rule is employed.
 
 Another important consideration is the potential misuse, overspecification, and underspecification of ontology terms~\cite{abedjan2012reconciling, lorey2011rdf}.
 In our use case, the goal is to enable querying data across the web under the assumption that data providers best understand their own data models and the intended entailments.
-Thus we avoid potential unatended entailments.
+Thus, we scope the rules to non-overlapping subwebs to prevent unintended entailments.
 However, we also allow query issuers to define additional rules that may interact with those provided by data publishers.
 This is justified by the fact that query issuers can more easily track and manage the consequences of their own entailment definitions, whereas it would be unrealistic to expect data providers to anticipate the broader implications of their rules beyond the scope of their own datasets or use cases.
 
@@ -42,7 +42,7 @@ At step $s$, the query engine receives a new \gls{kg}, denoted as $G$.
 The criterion $c_{sa}$ is applied independently to determine whether new alignment rules can be discovered.
 If such rules are found, the corresponding alignment rule \glspl{kg} are parsed and loaded into the engine.
 The alignment process is applied over $G$, producing an aligned graph $G^{\prime}$.
-The triples of $G^{\prime}$ are subsequently passed to the other reachability criteria and inserted into the internal knowledge base.
+The triples of $G^{\prime}$ are subsequently passed to the other reachability criteria and inserted into the internal knowledge base where the join operation of the query is process.
 It is crucial to use the triples of $G^{\prime}$ rather than those of $G$, as the reachability criteria are not designed to handle alignments across different vocabularies.
 Thus, one must either dynamically generate multiple online criteria that incorporate the alignment logic, which can be non-trivial given that criteria allow arbitrary computation, or ensure that the aligned triples are directly passed to the existing criteria.
 

@@ -4,11 +4,8 @@ This section presents some preliminary notions to understand our approach.
 \subsection{Knowledge Graph and \gls{rdf}}\label{sec:kg}
 
 A \gls{kg} represents knowledge in the form of a graph expressed as a set of triples~\cite{w3ConceptsAbstract}.
-\Gls{rdf} triples, denoted as $t = (s, p, o)$, are ordered tuples composed of three terms~\footnote{Definition inspired by \citetitle{traveling_map_ltqp}~\cite{traveling_map_ltqp}}:
-a subject $s \in \mathcal{I} \cup \mathcal{B}$,
-a predicate $p \in \mathcal{I}$,
-and an object $o \in \mathcal{I} \cup \mathcal{B} \cup \mathcal{L}$.
-Here, $\mathcal{I}$, $\mathcal{B}$, and $\mathcal{L}$ denote, respectively, the sets of all possible \glspl{iri}, blank nodes, and literals.
+\Gls{rdf} triples are ordered tuples composed of three terms: The subject, the predicate and the object.
+RDF terms can be \glspl{iri}, blank nodes, or literals.
 
 A triple expresses an atomic statement of the form “Socrates (subject) is (predicate) a man (object).”
 Accordingly, a \gls{kg} can encode a collection of statements such as “Plato wrote about Socrates,” “Socrates is a man,” and “A man has two legs.”
@@ -16,16 +13,11 @@ If the terms are \glspl{iri}, they can be dereferenced~\footnote{Dereferencing d
 to obtain additional information about a term.
 For instance, if \texttt{Socrates} is a dereferenceable \gls{iri}, accessing it may yield another \gls{kg} containing biographical information about Socrates.
 
-\subsection{Decentralized Knowledge Graphs and Subweb~\cite{traveling_map_ltqp}}\label{sec:dkg}
+\subsection{Subweb~\cite{traveling_map_ltqp}}\label{sec:dkg}
 
-We define a DKG as a KG $G$ materialized in a network of resources $R$.
-A resource $r_i \in R$ is mapped to a KG $g_i \subseteq G$, which is a set of triples~\cite{w3ConceptsAbstract}.
-We denote this mapping $r_i \mapsto_{\mathcal{G}} g_i$.
-A resource is mapped and exposed by an \gls{iri} $iri_i \in \mathcal{I}$ denoted by $iri_i \mapsto_{\mathcal{R}} r_i$ where $\mathcal{I}$ is the set of all \glspl{iri}.
-The network forms a graph where the resources $r_i$ are the nodes and the $iri_j$ are directed edges starting from $r_i$ to $r_j$.
-The $iri_j$ are \gls{rdf} terms in the triples in $g_i$.
-$G$ is formed by the union of all the $g_i$ mapped to a resource in the network.
-A subweb is a (sub)DKG defined by the KG derived from a set of \glspl{iri} controlled by a data provider.
+We define a \gls{dkg} as a \gls{kg} materialized in a network of resources.
+Those resources are identified by \glspl{iri} and accessible via \gls{http} requests.
+Thus a subweb is a \gls{dkg} derived from set a \glspl{iri} under the control of data provider.
 
 \subsection{Link Traversal Query Processing}\label{sec:ltqp}
 
