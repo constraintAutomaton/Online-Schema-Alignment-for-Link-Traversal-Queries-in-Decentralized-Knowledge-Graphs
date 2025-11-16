@@ -4,6 +4,7 @@ In this section, we present a demonstration of our system.
 
 We implemented an online schema alignment system using the link traversal version of the Comunica~\cite{taelman2018comunica} query engine.
 Both our demonstration~\footnote{\url{https://github.com/onlineSchemaAlignmentLTQP/demo}} and implementation~\footnote{\url{https://www.npmjs.com/package/query-sparql-link-traversal-solid-schema-alignment}} are open source and publicly available.
+Figure~\ref{fig:demo} presents a screenshot of the demonstrator.
 Users can download the implementation to integrate it as a library or use its command-line interface to execute queries.
 
 Our demonstration scenario is based on a social media network built using the SolidBench benchmark~\cite{Taelman2023}.
@@ -21,8 +22,6 @@ The modifications include:
 \end{itemize}
 
 The demonstrator is a web-based application that allows users to execute either the proposed queries or arbitrary custom queries.
-Some pop-ups are displayed to provide context for the demonstration and guide the user.
-They can be turned off with a button and are shown automatically only on the first visit.
 The demonstrator is hosted online~\footnote{TBD} and can also be deployed using a Docker Compose~\footnote{https://docs.docker.com/compose/} setup, which automatically generates the dataset, instantiates the servers, and launches the web application.
 Queries can be run over different network configurations: the base network or variants that use alternative vocabularies.
 The proposed queries are typical social media-related queries, such as retrieving information about a user, identifying the forums where a user has posted, and finding posts liked by specific users.
@@ -31,3 +30,10 @@ Users can also define custom schema alignment rules and specify the subwebs to w
 Additionally, the demonstrator includes a set of pre-defined queries using alternative vocabularies, together with the corresponding alignment rules that map them to the base SolidBench network.
 Furthermore, users can explore and compare both network configurations through a web interface that presents them in a file-based navigation view.
 We also provide a visual representation of the base network's data model, along with the set of alignment rules applied to the network variants that use different vocabularies.
+
+\begin{figure}[t]
+    \centering
+    \includegraphics[width=1\linewidth]{img/demo_screenshot.png}
+    \caption{Screenshot of the demonstrator.}
+    \label{fig:demo}
+\end{figure}
