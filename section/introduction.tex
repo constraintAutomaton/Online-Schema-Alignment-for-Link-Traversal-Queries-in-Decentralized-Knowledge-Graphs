@@ -11,11 +11,13 @@ Another major challenge arises from heterogeneity in knowledge representation an
 In many use cases, query issuers expect to formulate their queries under the assumption of a single, consistent knowledge representation.
 
 The problem of schema alignment can be regarded as a subset of the problem of reasoning.~\footnote{Querying is also a subset of reasoning.}
-The application of reasoning rules within SPARQL endpoints has already been explored~\cite{terdjimi2016hylar, terdjimi2015hylar}, and schema alignment in SPARQL endpoint systems has also been investigated~\cite{cheng2023considering, Joshi2012, maarten2023pod}.
+Reasoning over SPARQL endpoints~\cite{terdjimi2016hylar, terdjimi2015hylar} and RDF streams~\cite{dell2014incremental} has been investigated in prior work, and schema alignment within SPARQL endpoint systems has also been studied~\cite{cheng2023considering, Joshi2012, maarten2023pod}.
+The application of reasoning rules within SPARQL endpoints~\cite{terdjimi2016hylar, terdjimi2015hylar} and RDF streams~\cite{dell2014incremental} has already been explored, and schema alignment in SPARQL endpoint systems has also been investigated~\cite{cheng2023considering, Joshi2012, maarten2023pod}.
 However, existing approaches assume that alignment rules are known and scoped a priori.
 In contrast, our work introduces the notion of \textit{online schema alignment}, where schema mappings are discovered, scoped, and applied dynamically during the query execution in decentralized environments.
 
 This demo paper focuses on online schema alignment during \gls{ltqp}~\cite{Hartig2012}, enabling the execution of SPARQL queries~\cite{sparql_specification} over unindexed distributed networks.
+It also highlights the open challenges of schema alignment in this setting and outlines directions for future research.
 We propose a mechanism to dynamically retrieve remote schema alignment rules in order to align the target datasets with the user-issued query.
 In addition, we introduce a complementary mechanism that allows users to supply their own schema alignment rules alongside a query.
 These user-provided rules can either extend those discovered in the network or align queries that use alternative vocabularies with the target network.

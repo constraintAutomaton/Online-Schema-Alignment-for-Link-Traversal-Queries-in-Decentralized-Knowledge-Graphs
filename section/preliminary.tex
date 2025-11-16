@@ -26,7 +26,7 @@ The processing of such queries begins with an initially empty knowledge base (a 
 The query processing start by dereferencing the initial links and inserting the \gls{kg} from those resources inside the internal knowledge base.
 The next step consist of traversing the network using the triple inside of the knowledge base using the reachability criterion.
 Reachability criteria are boolean function that returns $true$ iff an \gls{iri} from a triple respect a condition defined by the engine.
-Example of such criterion are following the object term of triples having a predicate term with a specific \gls{iri} or the criterion \texttt{Cmatch}~\cite{hartig2016walking} which consist of dereferencing
+Examples of such criteria are following the object term of triples having a predicate term with a specific \gls{iri} or the criterion \texttt{Cmatch}~\cite{hartig2016walking} which consist of dereferencing
 \gls{iri} related to the variable of the query.
-For each triple inside of the knowledge base each reachability criterion determine which new \glspl{iri} to follow.
-In concurence the query is processed in the internal knowledge base and return the results in a streaming way, such that the traveral does not have to terminate before the user is receiving results.
+For each triple in the knowledge base each reachability criterion determines which new \glspl{iri} to follow.
+Concurrently, the query is executed in the internal knowledge base and returns results in a streaming manner, so the traversal does not need to finish before the user begins receiving output.

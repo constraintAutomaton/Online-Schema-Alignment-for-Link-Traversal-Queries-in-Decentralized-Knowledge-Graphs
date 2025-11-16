@@ -45,23 +45,3 @@ The alignment process is applied over $G$, producing an aligned graph $G^{\prime
 The triples of $G^{\prime}$ are subsequently passed to the other reachability criteria and inserted into the internal knowledge base where the join operation of the query is process.
 It is crucial to use the triples of $G^{\prime}$ rather than those of $G$, as the reachability criteria are not designed to handle alignments across different vocabularies.
 Thus, one must either dynamically generate multiple online criteria that incorporate the alignment logic, which can be non-trivial given that criteria allow arbitrary computation, or ensure that the aligned triples are directly passed to the existing criteria.
-
-For rule processing, we define $AR_s$ as the set of mappings between subwebs $S$ and schema alignment rules $R$ at step $s$.
-We consider that a step is the aquisition of a new \gls{kg} by the dereferencing of an \gls{iri}.
-
-More formally
-\begin{equation} \label{eq:schema_alignment_union}
-    AR_s = AR_u \cup AR_d
-\end{equation}
-
-\begin{equation*} \label{eq:schema_alignment_upper}
-    AR_u = \left\{ S_i \mapsto R_i \,\middle|\, 1 \le i \le n \right\}
-\end{equation*}
-
-\begin{equation*} \label{eq:schema_alignment_disjoint}
-    AR_d = \left\{ S_j \mapsto R_j \,\middle|\, 1 \le j \le n_s
-    \land \forall k \neq j,\; 1 \le k \le n_s \;, S_j \cap S_k = \emptyset \right\}
-\end{equation*}
-
-$AR_u$ denotes the set of $n$ rules defined by the user, while $AR_d$ represents the set of $n_s$ rules discovered up to and including step $s$.
-Note that the discovered rules in $AR_d$ are required to be non-overlapping, whereas overlaps with the user-defined rules in $AR_u$ are permitted.
