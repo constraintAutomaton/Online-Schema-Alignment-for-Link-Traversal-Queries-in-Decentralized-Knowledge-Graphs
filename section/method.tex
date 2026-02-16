@@ -1,7 +1,7 @@
 \section{Online Schema Alignment}
 
 Schema alignment requires the definition of a set of rules.
-In this work, we draw inspiration from the \gls{sssom} specification~\cite{sssom_website, matentzoglu2022simple} to structure and formalize these rules.
+In this work, we draw on the \gls{sssom} specification~\cite{sssom_website, matentzoglu2022simple} to structure and formalize these rules.\footnote{We adopt this approach for simplicity, as the focus of this paper is not on the formatting of the rules but on their discovery and applications.}
 An example of the resulting serialization is presented in Figure~\ref{fig:ruleSet}.
 
 For the purpose of this work, we developed a simplified version of \gls{sssom} and introduced the concept of a \emph{subweb} (see Section~\ref{sec:dkg}) to specify the domain of applicability of the schema alignment rules.
@@ -37,7 +37,7 @@ This mechanism enables reasoning over the level of precision of mappings when re
 \end{figure}
 
 To discover new alignment rules, we follow the reachability criteria paradigm with specific modifications to the operational pipeline.
-We define a reachability criterion $c_{sa}$, which dereferences the object term of any triple whose predicate has the IRI \texttt{semmap:ruleSetLocation}.
+We define a reachability criterion $c_{sa}$, which dereferences the object term of any triple whose predicate has the \gls{iri} \\ \texttt{semmap:ruleSetLocation}.
 At step $s$, the query engine receives a new \gls{kg}, denoted as $G$.
 The criterion $c_{sa}$ is applied independently to determine whether new alignment rules can be discovered.
 If such rules are found, the corresponding alignment rule \glspl{kg} are parsed and loaded into the engine.
