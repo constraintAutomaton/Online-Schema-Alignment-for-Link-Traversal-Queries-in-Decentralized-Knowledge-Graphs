@@ -1,24 +1,24 @@
 \section{Introduction}
 
-The integration of multiple knowledge bases poses substantial challenges across a wide range of applications.
-Such integration is often driven by diverse motivations, including the need to collaborate with stakeholders who maintain independent data sources,
-the pursuit of decentralized system architectures, and the ambition to enable cross-domain applications within specialized domains.
+%The integration of multiple knowledge bases poses substantial challenges across a wide range of applications.
+%Such integration is often driven by diverse motivations, including the need to collaborate with stakeholders who maintain independent data sources,
+%the pursuit of decentralized system architectures, and the ambition to enable cross-domain applications within specialized domains.
+%
+Integrating multiple knowledge graphs presents scalability and heterogeneity challenges.
+Scalability constraints due to data size or privacy often necessitate federated querying or link traversal-based querying~\cite{Hartig2012} rather than materialization.
+Heterogeneity in knowledge representation and vocabulary, particularly within \glspl{kg} and SPARQL, poses another major challenge, as query issuers expect to formulate queries under a single, consistent representation.
+Schema alignment can be viewed as a reasoning subset.
+Prior work has investigated reasoning over SPARQL endpoints~\cite{terdjimi2016hylar}, RDF streams~\cite{bonte2025languages}, and schema alignment in SPARQL systems~\cite{cheng2023considering, Joshi2012, maarten2023pod}.
+However, existing approaches assume alignment rules are known and scoped a priori.
+Our work introduces \textit{online schema alignment}, where schema mappings are discovered, scoped, and applied dynamically during query execution of \gls{ltqp}~\cite{Hartig2012}.
+In \gls{ltqp} over unindexed distributed networks, different providers often express semantically equivalent properties heterogeneously.
+Even trivial inconsistencies (e.g., \gls{https} vs. \gls{http} vocabularies) require query adaptations, like \texttt{UNION} clauses.
+This approach has critical limitations.
+It assumes query issuers know all relevant alignment rules across large decentralized networks and that rules apply globally which is unrealistic given ontology design complexity and that mistakes can be made by data providers~\cite{abedjan2012reconciling, lorey2011rdf}.
+Rule chaining compounds the problem: it requires either materializing intermediate \glspl{kg} through multiple \texttt{CONSTRUCT} queries or backchaining to materialize a final query~\cite{maarten2023pod}.
+Both of does method are not compatible with \gls{ltqp} as they would distribued the traversal policy.
+%Executing multiple queries disrupts traversal policies, as the query engine would need to maintain awareness of resources already traversed by other queries.
+%Conversely, materializing only a final query through backchaining fails to account for intermediate queries that may be essential for discovering and traversing the required subwebs.
+Deeper semantic mismatches further complicate matters: providers may conceptualize responses as "replies" versus "comments", or represent attributes like gender or city names as literals versus \glspl{iri}.
 
-The integration of multiple knowledge bases presents several challenges.
-A first challenge concerns scalability: due to the size of the data or privacy constraints, it is often impractical to materialize all knowledge bases within a single database system.
-In such cases, paradigms such as federated querying~\cite{buil2013federating} or link traversal-based querying~\cite{Hartig2012} can effectively address these limitations.
-Another major challenge arises from heterogeneity in knowledge representation and vocabulary, particularly within \glspl{kg} and the SPARQL query language, which form the focus of this paper.
-In many use cases, query issuers expect to formulate their queries under the assumption of a single, consistent knowledge representation.
-
-The problem of schema alignment can be regarded as a subset of the problem of reasoning.\footnote{Querying is also a subset of reasoning.}
-Reasoning over SPARQL endpoints~\cite{terdjimi2016hylar, terdjimi2015hylar} and RDF streams~\cite{bonte2025languages} has been investigated in prior work, and schema alignment within SPARQL endpoint systems has also been studied~\cite{cheng2023considering, Joshi2012, maarten2023pod}.
-However, existing approaches assume that alignment rules are known and scoped a priori.
-In contrast, our work introduces the notion of \textit{online schema alignment}, where schema mappings are discovered, scoped, and applied dynamically during the query execution in decentralized environments.
-
-This demo paper focuses on online schema alignment during \gls{ltqp}~\cite{Hartig2012}, enabling the execution of SPARQL queries~\cite{sparql_specification} over unindexed distributed networks.
-It also highlights the open challenges of schema alignment in this setting and outlines directions for future research.
-We propose a mechanism to dynamically retrieve remote schema alignment rules in order to align the target datasets with the user-issued query.
-In addition, we introduce a complementary mechanism that allows users to supply their own schema alignment rules alongside a query.
-These user-provided rules can either extend those discovered in the network or align queries that use alternative vocabularies with the target network.
-The remainder of this paper is organized as follows: we first present the problem statement, followed by preliminaries and the proposed approach.
-We then describe the demonstrator and conclude the paper.
+The rest of this paper presents the proposed approach, the demonstrator, and conclusions.

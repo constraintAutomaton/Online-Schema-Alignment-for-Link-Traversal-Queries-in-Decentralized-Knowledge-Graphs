@@ -2,10 +2,10 @@
 
 Schema alignment requires the definition of a set of rules.
 In this work, we draw on the \gls{sssom} specification~\cite{sssom_website, matentzoglu2022simple} to structure and formalize these rules.\footnote{We adopt this approach for simplicity, as the focus of this paper is not on the formatting of the rules but on their discovery and applications.}
-An example of the resulting serialization is presented in Figure~\ref{fig:ruleSet}.
+%An example of the resulting serialization is presented in Figure~\ref{fig:ruleSet}.
 
-For the purpose of this work, we developed a simplified version of \gls{sssom} and introduced the concept of a \emph{subweb} (see Section~\ref{sec:dkg}) to specify the domain of applicability of the schema alignment rules.
-In other words, these rules apply only within the designated subweb.
+For the purpose of this work, we developed a simplified version of \gls{sssom} and use the concept of \emph{subweb}~\cite{traveling_map_ltqp} to specify the domain of applicability of the schema alignment rules.
+In other words, these rules apply only within the designated set of \gls{iri}.
 We opted for this design for several practical reasons.
 
 Our system operates under the open-world assumption, in which multiple new \glspl{kg} and schema alignment rules may be discovered during processing.
@@ -21,11 +21,12 @@ However, we also allow query issuers to define additional rules that may interac
 This is justified by the fact that query issuers can more easily track and manage the consequences of their own entailment definitions, whereas it would be unrealistic to expect data providers to anticipate the broader implications of their rules beyond the scope of their own datasets or use cases.
 
 \Gls{sssom} defines multiple predicates for aligning ontology terms with varying levels of precision.
-For instance, \texttt{owl:sameAs} indicates that two instances are identical, whereas \texttt{skos:broadMatch} denotes that two instances are broadly related.\footnote{Prefix definitions are omitted for brevity.}
+For instance, \texttt{owl:sameAs} indicates that two instances are identical, whereas \texttt{skos:broadMatch} denotes that two instances are broadly related.
 In addition, \gls{sssom} specifies a set of rules to support transitivity, chaining, inversion, and generalization of alignments~\cite{sssom_website}.~\footnote{\url{https://mapping-commons.github.io/sssom/chaining-rules/}}
 These rules operate on the predicates used for defining alignments; for example, transitivity cannot be applied to \texttt{skos:relatedMatch}, nor can chaining be applied to rules involving \texttt{owl:equivalentClass} and \texttt{rdfs:subClassOf}.
 This mechanism enables reasoning over the level of precision of mappings when resolving schema alignments.
 
+\iffalse
 \begin{figure}
     \centering
     \lstinputlisting[basicstyle=\footnotesize\ttfamily]{code/rules.ttl}
@@ -35,13 +36,8 @@ This mechanism enables reasoning over the level of precision of mappings when re
        }
     \label{fig:ruleSet}
 \end{figure}
+\fi
 
-To discover new alignment rules, we follow the reachability criteria paradigm with specific modifications to the operational pipeline.
-We define a reachability criterion $c_{sa}$, which dereferences the object term of any triple whose predicate has the \gls{iri} \\ \texttt{semmap:ruleSetLocation}.
-At step $s$, the query engine receives a new \gls{kg}, denoted as $G$.
-The criterion $c_{sa}$ is applied independently to determine whether new alignment rules can be discovered.
-If such rules are found, the corresponding alignment rule \glspl{kg} are parsed and loaded into the engine.
-The alignment process is applied over $G$, producing an aligned graph $G^{\prime}$.
-The triples of $G^{\prime}$ are subsequently passed to the other reachability criteria and inserted into the internal knowledge base where the join operation of the query is process.
-It is crucial to use the triples of $G^{\prime}$ rather than those of $G$, as the reachability criteria are not designed to handle alignments across different vocabularies.
-Thus, one must either dynamically generate multiple online criteria that incorporate the alignment logic, which can be non-trivial given that criteria allow arbitrary computation, or ensure that the aligned triples are directly passed to the existing criteria.
+To discover alignment rules, we modify the traversal policy to follow object terms of triples with predicate \gls{iri} \texttt{semmap:ruleSetLocation}, where the dereferenced term provides a rule set.
+When the engine encounters a rule set, it applies the rules to its internal \gls{kg} with consideration to the subweb.
+The resulting \gls{kg} is used for both query joins and the traversal policy.
