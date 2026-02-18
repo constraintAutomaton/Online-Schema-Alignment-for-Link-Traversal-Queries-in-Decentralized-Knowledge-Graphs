@@ -3,18 +3,18 @@
 We implemented an online schema alignment system using the link traversal version of the Comunica~\cite{taelman2018comunica} query engine.
 Both our demonstration~\footnote{\url{https://github.com/onlineSchemaAlignmentLTQP/demo}} and implementation~\footnote{\url{https://www.npmjs.com/package/query-sparql-link-traversal-solid-schema-alignment}} are open source and publicly available.
 A video of the demonstration is available online.~\footnote{\url{https://www.youtube.com/watch?v=fGDQwu65los}}
-Users can download the implementation to integrate it as a library or use its command-line interface to execute queries.
+Users can download the implementation to integrate it as a library or use the command-line interface to execute queries.
 Our demonstration scenario is based on a social media network built using the SolidBench benchmark~\cite{Taelman2023}.
-This social media network is decentralized, meaning that users store their data in personal data vaults called \emph{pods}; there is no centralized endpoint to query user information.
+This social media network is decentralized, meaning that users store their data in personal data vaults called \emph{pods}, there is no centralized endpoint to query user information.
 For the purpose of this demonstration, we modified the user data such that different users express similar information using different vocabularies.
 Additionally, each user exposes a file that describes their schema alignment rules.
 The demonstrator is a web-based application that allows users to execute either the proposed queries or arbitrary custom queries.
 Queries can be run over two network configurations: the base network, where all pods use the same vocabulary, and the modified network, where pods use alternative vocabularies.
 The proposed queries are typical social media-related queries, such as retrieving information about a user, identifying the forums where a user has posted, and finding posts liked by specific users.
-To illustrate, consider a query retrieving a user's profile: when executed over the modified network without alignment, the query returns incomplete results because some pods use HTTPS variants or alternative terms for the same properties.
+To illustrate, consider a query retrieving a user's profile, when executed over the modified network without alignment, the query returns incomplete results because some pods use HTTPS variants or alternative terms for the same properties.
 With online schema alignment enabled, the engine discovers the relevant mapping rules during traversal and returns the complete result set.
 For each execution, the system provides detailed feedback, including the query results, execution time, and the alignment rules discovered during query processing, along with their associated subwebs.
-For the queries executable under both configurations, the average overhead introduced by online schema alignment is $0.28 \pm 0.31$ seconds.
+For the queries executable under both configurations, the average overhead introduced by online schema alignment is $0.28 \pm 0.31$ seconds.~\footnote{\url{https://github.com/constraintAutomaton/Online-Schema-Alignment-for-Link-Traversal-Queries-in-Decentralized-Knowledge-Graphs/blob/eswc-2026/eval/nomal_query_eval_times.md}}
 %Users can alternate between configurations to compare result completeness and observe the overhead introduced by schema alignment.
 Users can also define custom schema alignment rules and specify the subwebs to which these rules apply.
 

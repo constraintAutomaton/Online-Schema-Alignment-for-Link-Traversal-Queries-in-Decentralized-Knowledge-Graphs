@@ -2,7 +2,7 @@
 
 Schema alignment requires the definition of a set of rules.
 In this work, we draw~\footnote{\url{https://onlineschemaalignmentltqp.github.io/vocabulary/vocab.ttl}} on the \gls{sssom} specification~\cite{sssom_website, matentzoglu2022simple} to structure and formalize these rules.\footnote{We adopt this approach for simplicity, as the focus of this paper is not on the formatting of the rules but on their discovery and applications.}
-An example of the resulting serialization is available online~\footnote{\url{https://onlineschemaalignmentltqp.github.io/vocabulary/example.ttl}} and also in Figure \ref{fig:demo_screenshot}.
+An example of the resulting serialization is available online~\footnote{\url{https://onlineschemaalignmentltqp.github.io/vocabulary/example.ttl}}.
 
 For the purpose of this work, we developed a simplified version of \gls{sssom} and use the concept of \emph{subweb}~\cite{traveling_map_ltqp} to specify the domain of applicability of the schema alignment rules.
 In other words, these rules apply only within the designated set of IRI.
@@ -40,6 +40,12 @@ This mechanism enables reasoning over the level of precision of mappings when re
 \end{figure}
 \fi
 
+\iffalse
 To discover alignment rules, we modify the traversal policy to follow object terms of triples with predicate IRI \texttt{semmap:ruleSetLocation}, where the dereferenced term provides a rule set.
 When the engine encounters a rule set, it applies the rules to its internal \gls{kg} via forward chaining, scoped to the current subweb.
 The resulting \gls{kg} is used for both the joins operations and the traversal policy.
+\fi
+
+To discover alignment rules, we modify the traversal policy to follow object terms of triples with predicate IRI \texttt{semmap:ruleSetLocation}, where the dereferenced term provides a rule set.
+When the engine encounters a rule set at step $s_i$, it applies the rules to its internal \gls{kg} $G_{s_i}$ via forward chaining, producing an aligned graph $G^{\prime}_{s_i}$.
+The triples of $G^{\prime}_{s_i}$, rather than $G_{s_i}$, are passed to the traversal policy and inserted into the internal knowledge base for join processing, as traversal policies are not designed to handle vocabulary mismatches.
