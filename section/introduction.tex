@@ -19,6 +19,6 @@ Deeper semantic mismatches further complicate matters.
 For example, providers may conceptualize responses as "replies" or "comments", or represent attributes like gender or city names as literals or IRI.
 Rule chaining compounds the problem by requiring either materializing intermediate \glspl{kg} through multiple \texttt{CONSTRUCT} queries or backchaining to materialize a final query~\cite{maarten2023pod}.
 Both methods are incompatible with \gls{ltqp}.
-Executing multiple queries removes awareness of already-traversed documents, while backchaining into a single final query fails to discover intermediate resources needed for traversing the required subwebs.
+Executing multiple queries removes awareness of already-traversed documents, while backchaining into a single final query fails to discover intermediate resources needed for traversing the required search domain.
 
 The rest of this paper presents the proposed approach, the demonstrator, and conclusions.
