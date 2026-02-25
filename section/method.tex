@@ -1,18 +1,18 @@
 \section{Online Schema Alignment}\label{sec:method}
 
-Schema alignment requires the definition of a set of rules.
-In this work, we draw~\footnote{\url{https://onlineschemaalignmentltqp.github.io/vocabulary/vocab.ttl}} on the \gls{sssom} specification~\cite{sssom_website, matentzoglu2022simple} to structure and formalize these rules.\footnote{We adopt this approach for simplicity, as the focus of this paper is not on the formatting of the rules but on their discovery and applications.}
-An example of the resulting serialization is available online~\footnote{\url{https://onlineschemaalignmentltqp.github.io/vocabulary/example.ttl}}.
+%PC: I’d consider using W3ID.org as a base IRI here instead of github.io. If MSFT all of a sudden decides to start charging for github.io you wouldn’t be able to migrate this.
 
-For the purpose of this work, we developed a simplified version of \gls{sssom} and use the concept of \emph{subweb}~\cite{traveling_map_ltqp} to specify the domain of applicability of the schema alignment rules.
-In other words, these rules apply only within the designated set of IRI.
-We opted for this design for several practical reasons.
+Schema alignment requires the definition of a set of rules.
+Therefore, we chose to draw on the \gls{sssom} specification\footnote{\url{https://mapping-commons.github.io/sssom/}}~\cite{matentzoglu2022simple} to structure and formalize these rules.
+We developed a simplified version\footnote{Vocabulary: \url{https://onlineschemaalignmentltqp.github.io/vocabulary/vocab.ttl} -- Example: \url{https://onlineschemaalignmentltqp.github.io/vocabulary/example.ttl}} of \gls{sssom} and use the concept of \emph{subweb}~\cite{traveling_map_ltqp} to specify the domain of applicability of the schema alignment rules.
+In this way, the rules apply only within a designated set of IRIs.
+We also note that as logical contradictions are not possible, we can leave that out of scope.
 
 Our system operates under the open-world assumption, in which multiple new \glspl{kg} and schema alignment rules may be discovered during processing.
-To ensure robustness, the system must prevent infinite recursive rule applications.\footnote{With our schema alignment entailment, logical contradictions are not possible.}
+To ensure robustness, the system must prevent infinite recursive rule applications.
 When such situations occur, it should ideally resolve them without aborting the entire computation.
-Since rules are applied within specific domains the likelihood of infinite recursion is significantly reduced.
-In cases where infinite recursion is detected or overlap of subwebs, the simple resolution strategy of rejecting the newly generated schema alignment rule is employed.
+Since rules are applied within specific domains the likelihood of infinite recursion becomes minimal.
+In cases where infinite recursion is detected or overlap of subwebs, the simple resolution strategy of rejecting the newly generated schema alignment rule is applied.
 
 Another important consideration is the potential misuse, overspecification, and underspecification of ontology terms~\cite{abedjan2012reconciling, lorey2011rdf}.
 In our use case, the goal is to enable querying data across the web under the assumption that data providers best understand their own data models and the intended entailments.
