@@ -1,6 +1,18 @@
 \begin{abstract}
-The integration of heterogeneous \acrlongpl{kg} remains challenging, particularly in decentralized environments where discovery queries executed over distributed, unindexed sources requiring alignment rules for unified querying.
-This demo paper presents an online schema alignment approach integrated into a \acrlong{ltqp} engine using a web-based interface.
-A social media scenario demonstrates querying across networks with varying vocabularies.
-Source code, library, and command-line interface are provided for integration into other applications.
+  % context
+  Decentralized knowledge graph querying via link traversal is a promising way to integrate distributed data without centralization, but it is highly sensitive to vocabulary heterogeneity across sources.
+  % need
+  In practice, requiring query authors to know and encode all relevant schema mappings in advance is unrealistic, especially when mappings are local in scope, discovered only at runtime, or involve chained transformations.
+  % object
+  To address this, link-traversal query engines need a mechanism to discover, scope, and apply schema alignment rules online during query execution while preserving traversal behavior and avoiding unintended or recursive rule effects.
+  % Task of this paper
+  This demo paper presents and demonstrates such an approach by extending a Comunica-based LTQP engine with runtime discovery of scoped alignment rule sets (inspired by SSSOM), forward application of mappings during traversal, and a web interface and CLI evaluated on a decentralized social-media scenario with heterogeneous vocabularies.
+  % Conclusion / perspective
+  The demonstration shows that online schema alignment can recover complete query results in heterogeneous decentralized networks with low overhead, suggesting a practical foundation for richer web-scale reasoning in future LTQP systems.
+  
+  %The integration of heterogeneous \acrlongpl{kg} remains an open challenge.
+  %Alignment rules can help to select relevant queries decentralized environments where discovery queries executed over distributed, unindexed sources requiring alignment rules for unified querying.
+  %This demo paper presents an online schema alignment approach integrated into a \acrlong{ltqp} engine using a web-based interface.
+  %A social media scenario demonstrates querying across networks with varying vocabularies.
+  %Source code, library, and command-line interface are provided for integration into other applications.
 \end{abstract}
