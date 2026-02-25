@@ -14,7 +14,7 @@ The proposed queries are typical social media-related queries, such as retrievin
 To illustrate, consider a query retrieving a user's profile, when executed over the modified network without alignment, the query returns incomplete results because some pods use HTTPS variants or alternative terms for the same properties.
 With online schema alignment enabled, the engine discovers the relevant mapping rules during traversal and returns the complete result set.
 For each execution, the system provides detailed feedback, including the query results, execution time, and the alignment rules discovered during query processing, along with their associated subwebs.
-For the queries executable under both configurations, the average overhead introduced by online schema alignment is $0.28 \pm 0.31$ seconds. \rt{Can you also mention the appromiate average exec time of queries, so readers see that this overhead is not that significant.}~\footnote{\url{https://github.com/constraintAutomaton/Online-Schema-Alignment-for-Link-Traversal-Queries-in-Decentralized-Knowledge-Graphs/blob/eswc-2026/eval/nomal_query_eval_times.md}}
+For the queries executable under both configurations, the average overhead introduced by online schema alignment is $0.28 \pm 0.31$ seconds where the average query execution time is $2.07 \pm 2.24$.~\footnote{\url{https://github.com/constraintAutomaton/Online-Schema-Alignment-for-Link-Traversal-Queries-in-Decentralized-Knowledge-Graphs/blob/eswc-2026/eval/nomal_query_eval_times.md}}
 %Users can alternate between configurations to compare result completeness and observe the overhead introduced by schema alignment.
 Users can also define custom schema alignment rules and specify the subwebs to which these rules apply.
 

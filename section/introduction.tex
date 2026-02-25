@@ -1,19 +1,17 @@
 \section{Introduction}
 
-%The integration of multiple knowledge bases poses substantial challenges across a wide range of applications.
-%Such integration is often driven by diverse motivations, including the need to collaborate with stakeholders who maintain independent data sources,
-%the pursuit of decentralized system architectures, and the ambition to enable cross-domain applications within specialized domains.
-%
 Integrating multiple \glspl{kg} presents scalability and heterogeneity challenges.
-Scalability constraints due to data size or privacy \rt{Another reason is that KGs are simply often managed/created by different orgs/teams/companies, and federation allows you to cross these organizational boundaries. I'd mention this as well.} often necessitate federated querying or link traversal-based querying~\cite{Hartig2012} rather than materialization.
+Scalability constraints due to data size, decentralization of data due to its management by different entities, or privacy often necessitate federated querying or link traversal-based querying~\cite{Hartig2012} rather than materialization.
 Heterogeneity in knowledge representation and vocabulary poses another major challenge, as query issuers expect to formulate queries under a single, consistent representation.
-\rt{The connection between these sentences is missing. Make sure to first mention the need for schema alignment/reason, and how it can solve the problem above.}
+Schema alignment aims to define rules that map knowledge expressed in one vocabulary to a semantically equivalent representation in another.
+We propose that schema alignment can serve as a tool to simplify the formulation of such queries.
 Schema alignment can be viewed as a subset of the problem of reasoning.
 Prior work has investigated reasoning over SPARQL endpoints~\cite{terdjimi2016hylar}, RDF streams~\cite{bonte2025languages}, and schema alignment in SPARQL systems~\cite{cheng2023considering, Joshi2012, maarten2023pod}.
 However, existing approaches assume alignment rules are known and scoped a priori.
-Our work introduces \textit{online schema alignment}, where schema mappings are discovered, scoped, and applied dynamically during query execution of \gls{ltqp}~\cite{Hartig2012}.\rt{I like this part, but the reader does not not LTQP yet. So make sure to explain it (and why it's needed) briefly before you get to this part.}
-In \gls{ltqp} over unindexed distributed networks, different providers often express semantically equivalent properties heterogeneously.
-Even trivial inconsistencies (e.g., HTTP vs. HTTPS schema.org vocabularies) require query adaptations, like \texttt{UNION} clauses.\rt{Let's explicitly use the term "query rewriting" here.}
+Our work introduces \textit{online schema alignment}, where schema mappings are discovered, scoped, and applied dynamically during query execution of \gls{ltqp}~\cite{Hartig2012}.
+\Gls{ltqp} is a query paradigm that exploits the fact that IRI in triples can be dereferenced to discover \glspl{kg} containing further information about a given term~\cite{linked_data}.
+It is particularly suited to unindexed distributed networks, where different providers often express semantically equivalent properties using heterogeneous vocabularies.
+Even trivial inconsistencies (e.g., HTTP vs. HTTPS schema.org vocabularies) require query rewriting, like inserting \texttt{UNION} clauses.
 However, this approach has critical limitations,
 as it assumes query issuers know all relevant alignment rules across large decentralized networks,
 and that rules apply globally,
