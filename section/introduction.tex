@@ -5,16 +5,19 @@
 %the pursuit of decentralized system architectures, and the ambition to enable cross-domain applications within specialized domains.
 %
 Integrating multiple \glspl{kg} presents scalability and heterogeneity challenges.
-Scalability constraints due to data size or privacy often necessitate federated querying or link traversal-based querying~\cite{Hartig2012} rather than materialization.
+Scalability constraints due to data size or privacy \rt{Another reason is that KGs are simply often managed/created by different orgs/teams/companies, and federation allows you to cross these organizational boundaries. I'd mention this as well.} often necessitate federated querying or link traversal-based querying~\cite{Hartig2012} rather than materialization.
 Heterogeneity in knowledge representation and vocabulary poses another major challenge, as query issuers expect to formulate queries under a single, consistent representation.
+\rt{The connection between these sentences is missing. Make sure to first mention the need for schema alignment/reason, and how it can solve the problem above.}
 Schema alignment can be viewed as a subset of the problem of reasoning.
 Prior work has investigated reasoning over SPARQL endpoints~\cite{terdjimi2016hylar}, RDF streams~\cite{bonte2025languages}, and schema alignment in SPARQL systems~\cite{cheng2023considering, Joshi2012, maarten2023pod}.
 However, existing approaches assume alignment rules are known and scoped a priori.
-Our work introduces \textit{online schema alignment}, where schema mappings are discovered, scoped, and applied dynamically during query execution of \gls{ltqp}~\cite{Hartig2012}.
+Our work introduces \textit{online schema alignment}, where schema mappings are discovered, scoped, and applied dynamically during query execution of \gls{ltqp}~\cite{Hartig2012}.\rt{I like this part, but the reader does not not LTQP yet. So make sure to explain it (and why it's needed) briefly before you get to this part.}
 In \gls{ltqp} over unindexed distributed networks, different providers often express semantically equivalent properties heterogeneously.
-Even trivial inconsistencies (e.g., HTTP vs. HTTPS vocabularies) require query adaptations, like \texttt{UNION} clauses.
-This approach has critical limitations.
-It assumes query issuers know all relevant alignment rules across large decentralized networks and that rules apply globally which is unrealistic given ontology design complexity and that mistakes can be made by data providers~\cite{abedjan2012reconciling, lorey2011rdf}.
+Even trivial inconsistencies (e.g., HTTP vs. HTTPS schema.org vocabularies) require query adaptations, like \texttt{UNION} clauses.\rt{Let's explicitly use the term "query rewriting" here.}
+However, this approach has critical limitations,
+as it assumes query issuers know all relevant alignment rules across large decentralized networks,
+and that rules apply globally,
+which is unrealistic given ontology design complexity and that mistakes can be made by data providers~\cite{abedjan2012reconciling, lorey2011rdf}.
 Deeper semantic mismatches further complicate matters.
 For example, providers may conceptualize responses as "replies" or "comments", or represent attributes like gender or city names as literals or IRI.
 Rule chaining compounds the problem by requiring either materializing intermediate \glspl{kg} through multiple \texttt{CONSTRUCT} queries or backchaining to materialize a final query~\cite{maarten2023pod}.
@@ -22,4 +25,4 @@ Both methods are incompatible with \gls{ltqp}.
 Executing multiple queries removes awareness of already-traversed documents, while backchaining into a single final query fails to discover intermediate resources needed for traversing the required search domain.
 
 
-The rest of this paper presents \hyperref[sec:method]{the proposed approach}, \hyperref[sec:demo]{the demonstrator}, and \hyperref[sec:conclusion]{conclusions}.
+The rest of this paper presents \hyperref[sec:method]{the proposed approach} \rt{But what is the proposed approach? It has not been hinted to yet.}, \hyperref[sec:demo]{the demonstrator}, and \hyperref[sec:conclusion]{conclusions}.

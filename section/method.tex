@@ -5,13 +5,13 @@ In this work, we draw~\footnote{\url{https://onlineschemaalignmentltqp.github.io
 An example of the resulting serialization is available online~\footnote{\url{https://onlineschemaalignmentltqp.github.io/vocabulary/example.ttl}}.
 
 For the purpose of this work, we developed a simplified version of \gls{sssom} and use the concept of \emph{subweb}~\cite{traveling_map_ltqp} to specify the domain of applicability of the schema alignment rules.
-In other words, these rules apply only within the designated set of IRI.
-We opted for this design for several practical reasons.
+In other words, these rules apply only within the designated set of IRIs.
+We opted for this design for several practical reasons.\rt{Are the following paragraphs the two reasons? If so, start them with "First," and "Second,".}
 
 Our system operates under the open-world assumption, in which multiple new \glspl{kg} and schema alignment rules may be discovered during processing.
 To ensure robustness, the system must prevent infinite recursive rule applications.\footnote{With our schema alignment entailment, logical contradictions are not possible.}
 When such situations occur, it should ideally resolve them without aborting the entire computation.
-Since rules are applied within specific domains the likelihood of infinite recursion is significantly reduced.
+Since rules are applied within specific domains, the likelihood of infinite recursion is significantly reduced.
 In cases where infinite recursion is detected or overlap of subwebs, the simple resolution strategy of rejecting the newly generated schema alignment rule is employed.
 
 Another important consideration is the potential misuse, overspecification, and underspecification of ontology terms~\cite{abedjan2012reconciling, lorey2011rdf}.
@@ -46,6 +46,6 @@ When the engine encounters a rule set, it applies the rules to its internal \gls
 The resulting \gls{kg} is used for both the joins operations and the traversal policy.
 \fi
 
-To discover alignment rules, we modify the traversal policy to follow object terms of triples with predicate IRI \texttt{semmap:ruleSetLocation}, where the dereferenced term provides a rule set.
+To discover alignment rules, we modify the traversal policy \rt{Traversal policies have not been explained yet. Either do this here, or in the intro.} to follow object terms of triples with predicate IRI \texttt{semmap:ruleSetLocation}, where the dereferenced term provides a rule set.
 When the engine encounters a rule set at step $s_i$, it applies the rules to its internal \gls{kg} $G_{s_i}$ via forward chaining, producing an aligned graph $G^{\prime}_{s_i}$.
-The triples of $G^{\prime}_{s_i}$, rather than $G_{s_i}$, are passed to the traversal policy and inserted into the internal knowledge base for join processing, as traversal policies are not designed to handle vocabulary mismatches.
+The triples of $G^{\prime}_{s_i}$, rather than $G_{s_i}$, are passed to the traversal policy and inserted into the internal knowledge base for join processing, as traversal policies are not designed to handle vocabulary mismatches.\rt{I would just explain this in words. The semi-formal notation adds no value IMO.}
