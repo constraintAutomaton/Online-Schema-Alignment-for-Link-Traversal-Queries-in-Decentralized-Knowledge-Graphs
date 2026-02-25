@@ -4,22 +4,22 @@
 %Such integration is often driven by diverse motivations, including the need to collaborate with stakeholders who maintain independent data sources,
 %the pursuit of decentralized system architectures, and the ambition to enable cross-domain applications within specialized domains.
 %
-Integrating multiple \glspl{kg} presents scalability and heterogeneity challenges.
-Scalability constraints due to data size or privacy often necessitate federated querying or link traversal-based querying~\cite{Hartig2012} rather than materialization.
+Integrating multiple \glspl{kg} presents both scalability and heterogeneity challenges.
+Scalability constraints arising from data size or privacy requirements require federated querying or link-traversal-based querying~\cite{Hartig2012} rather than materialization.
 Heterogeneity in knowledge representation and vocabulary poses another major challenge, as query issuers expect to formulate queries under a single, consistent representation.
-Schema alignment can be viewed as a subset of the problem of reasoning.
+Schema alignment can be viewed as a subset of the broader reasoning problem.
 Prior work has investigated reasoning over SPARQL endpoints~\cite{terdjimi2016hylar}, RDF streams~\cite{bonte2025languages}, and schema alignment in SPARQL systems~\cite{cheng2023considering, Joshi2012, maarten2023pod}.
-However, existing approaches assume alignment rules are known and scoped a priori.
-Our work introduces \textit{online schema alignment}, where schema mappings are discovered, scoped, and applied dynamically during query execution of \gls{ltqp}~\cite{Hartig2012}.
-In \gls{ltqp} over unindexed distributed networks, different providers often express semantically equivalent properties heterogeneously.
-Even trivial inconsistencies (e.g., HTTP vs. HTTPS vocabularies) require query adaptations, like \texttt{UNION} clauses.
-This approach has critical limitations.
-It assumes query issuers know all relevant alignment rules across large decentralized networks and that rules apply globally which is unrealistic given ontology design complexity and that mistakes can be made by data providers~\cite{abedjan2012reconciling, lorey2011rdf}.
+However, existing approaches assume that alignment rules are known in advance and scoped a priori.
+Our work introduces \textit{online schema alignment}, in which schema mappings are discovered, scoped, and applied dynamically during \gls{ltqp} query execution~\cite{Hartig2012}.
+In \gls{ltqp} over unindexed distributed networks, different providers often express semantically equivalent properties using heterogeneous vocabularies.
+Even trivial inconsistencies (e.g., HTTP vs.\ HTTPS vocabularies) require query adaptations such as \texttt{UNION} clauses.
+However, this query-rewriting approach has critical limitations.
+It assumes that query issuers know all relevant alignment rules across large decentralized networks and that these rules apply globally.
+Both assumptions are unrealistic, given the complexity of ontology design and the possibility of provider-side modeling mistakes~\cite{abedjan2012reconciling, lorey2011rdf}.
 Deeper semantic mismatches further complicate matters.
-For example, providers may conceptualize responses as "replies" or "comments", or represent attributes like gender or city names as literals or IRI.
-Rule chaining compounds the problem by requiring either materializing intermediate \glspl{kg} through multiple \texttt{CONSTRUCT} queries or backchaining to materialize a final query~\cite{maarten2023pod}.
+For example, providers may conceptualize responses as ``replies'' or ``comments'', or represent attributes such as gender or city names as literals or IRIs.
+Rule chaining compounds the problem by requiring either the materialization of intermediate \glspl{kg} through multiple \texttt{CONSTRUCT} queries or backchaining to produce a final query~\cite{maarten2023pod}.
 Both methods are incompatible with \gls{ltqp}.
-Executing multiple queries removes awareness of already-traversed documents, while backchaining into a single final query fails to discover intermediate resources needed for traversing the required search domain.
+Executing multiple queries loses awareness of previously traversed documents, while backchaining into a single final query fails to discover intermediate resources needed to traverse the required search domain.
 
-
-The rest of this paper presents \hyperref[sec:method]{the proposed approach}, \hyperref[sec:demo]{the demonstrator}, and \hyperref[sec:conclusion]{conclusions}.
+The remainder of this paper presents \hyperref[sec:method]{the proposed approach}, \hyperref[sec:demo]{the demonstrator}, and \hyperref[sec:conclusion]{the conclusions}.
