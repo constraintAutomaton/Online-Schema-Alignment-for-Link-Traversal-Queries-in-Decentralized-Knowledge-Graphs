@@ -45,6 +45,6 @@ The resulting \gls{kg} is used for both the joins operations and the traversal p
 \fi
 
 In \gls{ltqp}, a traversal policy determines which discovered IRI the engine should dereference to find additional \gls{kg}.
-To discover alignment rules, we extend this policy to also follow object terms of triples with predicate IRI \texttt{semmap:ruleSetLocation}, where the dereferenced term provides a rule set.
+To discover alignment rules, we extend this policy to also follow object terms of triples with predicate IRI \texttt{semmap:\\ruleSetLocation}, where the dereferenced term provides a rule set.
 When the engine encounters a rule set, it applies the rules to its internal \gls{kg} via forward chaining, producing additional aligned triples.
 These aligned triples, rather than the original ones, are passed to the traversal policy and used for join processing, as traversal policies are not designed to handle vocabulary mismatches.
