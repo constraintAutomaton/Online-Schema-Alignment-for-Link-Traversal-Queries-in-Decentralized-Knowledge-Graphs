@@ -1,7 +1,13 @@
 \begin{abstract}
-The integration of heterogeneous \acrlongpl{kg} remains challenging, particularly in decentralized environments where discovery queries executed over distributed, unindexed sources requiring alignment rules for unified querying.\rt{This first sentence is very loaded. I recommend splitting it up into multiple sentences, with some more context on what every part means, possible with some examples.}
-This demo paper presents an online schema alignment approach integrated into a \acrlong{ltqp} engine using a web-based interface.
-A social media scenario demonstrates querying across networks with varying vocabularies.
-Source code, library, and command-line interface are provided for integration into other applications.
-\rt{In general, the abstract doesn't feel very exciting to me. Can you try formulating it using our standard context,need,task,... format?}
+% context
+Decentralized \acrlongpl{kg} querying enables integrating distributed data without centralization, but is highly sensitive to vocabulary heterogeneity.
+% need
+Expecting query issuers to anticipate all vocabulary mismatches is unrealistic, especially when alignment rules are local in scope or discovered at runtime.
+% object
+We present an \emph{online schema alignment} approach for \acrfull{ltqp} that discovers, scopes, and applies alignment rules dynamically during query execution while preserving traversal behavior.
+% task of this paper
+This demo paper demonstrates the approach on a decentralized social-media scenario through a web interface built on a Comunica-based \acrshort{ltqp} engine.
+Source code, a CLI, and a reusable library are publicly available.
+% conclusion / perspective
+The demonstration shows that online schema alignment recovers complete query results with low overhead, providing a practical foundation for web-scale reasoning in \acrshort{ltqp} systems.
 \end{abstract}

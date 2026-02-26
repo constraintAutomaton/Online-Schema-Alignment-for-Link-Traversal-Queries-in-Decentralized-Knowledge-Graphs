@@ -1,22 +1,22 @@
 \section{Online Schema Alignment}\label{sec:method}
 
 Schema alignment requires the definition of a set of rules.
-In this work, we draw~\footnote{\url{https://onlineschemaalignmentltqp.github.io/vocabulary/vocab.ttl}} on the \gls{sssom} specification~\cite{sssom_website, matentzoglu2022simple} to structure and formalize these rules.\footnote{We adopt this approach for simplicity, as the focus of this paper is not on the formatting of the rules but on their discovery and applications.}
-An example of the resulting serialization is available online~\footnote{\url{https://onlineschemaalignmentltqp.github.io/vocabulary/example.ttl}}.
-
+In this work, we draw~\footnote{-- Vocabulary: \url{https://onlineschemaalignmentltqp.github.io/vocabulary/vocab.ttl} -- Example: \url{https://onlineschemaalignmentltqp.github.io/vocabulary/example.ttl}}
+on the \gls{sssom} specification~\cite{sssom_website, matentzoglu2022simple} to structure and formalize these rules.%\footnote{We adopt this approach for simplicity, as the focus of this paper is not on the formatting of the rules but on their discovery and applications.}
 For the purpose of this work, we developed a simplified version of \gls{sssom} and use the concept of \emph{subweb}~\cite{traveling_map_ltqp} to specify the domain of applicability of the schema alignment rules.
 In other words, these rules apply only within the designated set of IRIs.
 We opted for this design for several practical reasons.
 First, our system operates under the open-world assumption, in which multiple new \glspl{kg} and schema alignment rules may be discovered during processing.
-To ensure robustness, the system must prevent infinite recursive rule applications.\footnote{With our schema alignment entailment, logical contradictions are not possible.}
+To ensure robustness, the system should prevent infinite recursive rule applications.\footnote{With our schema alignment entailment, logical contradictions are not possible.}
 When such situations occur, it should ideally resolve them without aborting the entire computation.
 Since rules are applied within specific domains, the likelihood of infinite recursion is significantly reduced.
-In cases where infinite recursion is detected or overlap of subwebs, the simple resolution strategy of rejecting the newly generated schema alignment rule is employed.
+In cases where infinite recursion is detected or overlap of subwebs, the simple resolution strategy of rejecting the newly generated schema alignment rule is applied.
 Second, there is the potential misuse, overspecification, and underspecification of ontology terms~\cite{abedjan2012reconciling, lorey2011rdf}.
 In our use case, the goal is to enable querying data across the web under the assumption that data providers best understand their own data models and the intended entailments.
 Thus, we scope the rules to non-overlapping subwebs to prevent unintended entailments.
 However, we also allow query issuers to define additional rules that may interact with those provided by data publishers.
 This is justified by the fact that query issuers can more easily track and manage the consequences of their own entailment definitions, whereas it would be unrealistic to expect data providers to anticipate the broader implications of their rules beyond the scope of their own datasets or use cases.
+Third, global alignment rules that are discoverable and executable on the web present a potential attack vector for malicious actors.
 
 \iffalse
 \Gls{sssom} defines multiple predicates for aligning ontology terms with varying levels of precision.
@@ -44,7 +44,7 @@ When the engine encounters a rule set, it applies the rules to its internal \gls
 The resulting \gls{kg} is used for both the joins operations and the traversal policy.
 \fi
 
-In \gls{ltqp}, a traversal policy determines which discovered IRI the engine should dereference to find additional data.
+In \gls{ltqp}, a traversal policy determines which discovered IRI the engine should dereference to find additional \gls{kg}.
 To discover alignment rules, we extend this policy to also follow object terms of triples with predicate IRI \texttt{semmap:ruleSetLocation}, where the dereferenced term provides a rule set.
 When the engine encounters a rule set, it applies the rules to its internal \gls{kg} via forward chaining, producing additional aligned triples.
 These aligned triples, rather than the original ones, are passed to the traversal policy and used for join processing, as traversal policies are not designed to handle vocabulary mismatches.
