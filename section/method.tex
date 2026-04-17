@@ -3,8 +3,7 @@
 Schema alignment requires the definition of a set of rules.
 In this work, we draw\footnote{-- Vocabulary: \url{https://onlineschemaalignmentltqp.github.io/vocabulary/vocab.ttl} -- Example: \url{https://onlineschemaalignmentltqp.github.io/vocabulary/example.ttl}}
 on the \gls{sssom} specification~\cite{sssom_website, matentzoglu2022simple} to structure and formalize these rules. %\footnote{We adopt this approach for simplicity, as the focus of this paper is not on the formatting of the rules but on their discovery and applications.}
-For the purpose of this work, we developed a simplified version of \gls{sssom} and use the concept of \emph{subweb}~\cite{traveling_map_ltqp} to specify the domain of applicability of the schema alignment rules.
-In other words, these rules apply only within designated sets of IRIs.
+For the purpose of this work, we developed a simplified version of \gls{sssom} and use the concept of \emph{subweb}~\cite{traveling_map_ltqp}, a sub-\gls{dkg} defined by the \gls{kg} derived from a set of \glspl{iri} controlled by a data provider, to scope the domain of applicability of the alignment rules.
 We opted for this design for several practical reasons.
 First, our system operates under the open-world assumption, in which multiple new \glspl{kg} and schema alignment rules may be discovered during processing.
 To ensure robustness, the system should prevent infinite recursive rule applications.\footnote{With our schema alignment entailment, logical contradictions are not possible.}
@@ -44,7 +43,7 @@ When the engine encounters a rule set, it applies the rules to its internal \gls
 The resulting \gls{kg} is used for both the joins operations and the traversal policy.
 \fi
 
-In \gls{ltqp}, a traversal policy determines which discovered IRI the engine should dereference to find additional \gls{kg}.
+In \gls{ltqp}, a traversal policy determines which discovered \glspl{iri} the engine should dereference to find additional \glspl{kg}.
 To discover alignment rules, we extend this policy to also follow object terms of triples with predicate IRI \texttt{semmap:\\ruleSetLocation}, where the dereferenced term provides a rule set.
 When the engine encounters a rule set, it applies the rules to its internal \gls{kg} via forward chaining, producing additional aligned triples.
 These aligned triples, rather than the original ones, are passed to the traversal policy and used for join processing, as traversal policies are not designed to handle vocabulary mismatches.
