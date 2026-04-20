@@ -16,7 +16,6 @@ With online schema alignment enabled, the engine discovers the relevant mapping 
 For each execution, the system provides detailed feedback, including the query results, execution time, and the alignment rules discovered during query processing, along with their associated subwebs.
 Table~\ref{tab:eval} reports the execution times\footnote{\url{https://github.com/constraintAutomaton/Online-Schema-Alignment-for-Link-Traversal-Queries-in-Decentralized-Knowledge-Graphs/blob/main/eval/nomal_query_eval_times.md}} over ten runs per query.
 For queries that complete under both configurations, alignment introduces an average overhead of $0.28 \pm 0.31$\,s.
-Notably, the messages query times out without alignment but completes in $6.90 \pm 1.58$\,s with it, demonstrating that alignment can recover results that are otherwise unreachable.
 
 \begin{table}[t]
   \centering
@@ -27,14 +26,14 @@ Notably, the messages query times out without alignment but completes in $6.90 \
     Messages of liked users       & $6.90 \pm 1.58$ & --- \\
     Forums a user posted          & ---             & --- \\
     User information              & $1.09 \pm 0.07$ & $1.05 \pm 0.05$ \\
-    Posts of a user               & $0.35 \pm 0.05$ & $0.20 \pm 0.00$ \\
+    Posts of a user               & $0.35 \pm 0.05$ & $*$ \\
     Tag distribution              & $2.77 \pm 0.22$ & $2.11 \pm 0.27$ \\
     \bottomrule
   \end{tabular}
-  \caption{Average query execution times (--- = timeout at 180\,s).}
+  \caption{The usage of online schema alignment does not have a large impact on the query execution time of the demo queries. "---" indicates a timeout (180\,s) and $*$ indicates incomplete results.}
   \label{tab:eval}
 \end{table}
-%Users can alternate between configurations to compare result completeness and observe the overhead introduced by schema alignment.
+Users can alternate between configurations to compare result completeness and observe the overhead introduced by schema alignment.
 Users can also define custom schema alignment rules scoped to specific subwebs, which can additionally serve to align the vocabulary of their queries to that of a target network.
 
 \iffalse

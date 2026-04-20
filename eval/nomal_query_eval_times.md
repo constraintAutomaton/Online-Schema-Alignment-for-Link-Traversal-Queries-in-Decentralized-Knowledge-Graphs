@@ -19,19 +19,20 @@
 | Request the messages of liked users             |         — |         — |         — |         — |         — |         — |         — |         — |         — |          — |       — |       — |       — |
 | Request the forums a user posted                |         — |         — |         — |         — |         — |         — |         — |         — |         — |          — |       — |       — |       — |
 | Request the information of a user               |       1.0 |       1.0 |       1.1 |       1.1 |       1.0 |       1.1 |       1.1 |       1.1 |       1.0 |        1.0 |    1.05 |    1.05 |    0.05 |
-| Requests the post of a user                     |       0.2 |       0.2 |       0.2 |       0.2 |       0.2 |       0.2 |       0.2 |       0.2 |       0.2 |        0.2 |    0.20 |    0.20 |    0.00 |
+| Requests the post of a user                     |        \* |        \* |        \* |        \* |        \* |        \* |        \* |        \* |        \* |         \* |      \* |      \* |      \* |
 | Request the distribution of tags used by a user |       1.9 |       1.8 |       1.7 |       1.9 |       2.2 |       2.2 |       2.6 |       2.2 |       2.4 |        2.2 |    2.11 |    2.20 |    0.27 |
 
 > **Note:** "—" indicates a TIMEOUT (180 s).
+> "\*" indicates a incomplete result.
 
 ## Analysis
 
 Comparing queries that completed under both methods (excluding timeouts):
 
 | Query                                           | Alignment Avg (s) | Normal Avg (s) | Difference (s) |
-| ----------------------------------------------- | -----------------: | -------------: | --------------: |
-| Request the information of a user               |               1.09 |           1.05 |           +0.04 |
-| Requests the post of a user                     |               0.35 |           0.20 |           +0.15 |
-| Request the distribution of tags used by a user |               2.77 |           2.11 |           +0.66 |
+| ----------------------------------------------- | ----------------: | -------------: | -------------: |
+| Request the information of a user               |              1.09 |           1.05 |          +0.04 |
+| Requests the post of a user                     |                \* |             \* |             \* |
+| Request the distribution of tags used by a user |              2.77 |           2.11 |          +0.66 |
 
 **Overall:** The online schema alignment method introduces an average overhead of **0.28 &plusmn; 0.31 s** compared to normal processing.
